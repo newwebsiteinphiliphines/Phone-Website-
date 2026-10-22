@@ -1,78 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fil">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Coming Soon</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usok Tayo! Vape Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
-:root{--bg:#f2efe6;--ink:#1d2a44;--accent:#ff5a36;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a2b;--ink:#f2efe6;--accent:#ff7a59}}
-:root[data-theme="dark"]{--bg:#141a2b;--ink:#f2efe6;--accent:#ff7a59}
+:root{--blue:#0B2A8A;--deep:#071B5E;--red:#CE1126;--sun:#FCD116;--paper:#FFF8E1;--ink:#16110A}
 *{box-sizing:border-box}
-html,body{height:100%;margin:0}
-body{background:var(--bg);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;padding:24px;font-family:'Bricolage Grotesque',Georgia,sans-serif}
-h1{font-weight:800;font-size:clamp(3rem,16vw,10rem);line-height:.9;letter-spacing:-.03em;margin:0;text-align:center}
-h1 span{display:block;color:var(--accent)}
-#cd{display:flex;gap:clamp(12px,4vw,36px);text-align:center}
-#cd div{min-width:64px}
-#cd b{display:block;font-size:clamp(2rem,10vw,4.5rem);font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
-#cd small{font-size:clamp(.8rem,3vw,1.1rem);opacity:.75}
-#when{margin:0;opacity:.8;text-align:center}
-.ft{margin:0 0 -16px;font-size:clamp(1.2rem,5vw,1.8rem);font-weight:800;letter-spacing:.12em;text-align:center;color:var(--accent)}
-.features{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
-.features li{border:2px solid var(--ink);border-radius:8px;padding:12px 20px;font-weight:800;font-size:clamp(1rem,4vw,1.4rem);background:linear-gradient(100deg,var(--ink) 35%,var(--accent) 50%,var(--ink) 65%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 2.5s linear infinite,bob 3s ease-in-out infinite,glow 2s ease-in-out infinite}
-.features li:nth-child(2){animation-delay:.6s,.6s,.6s}
-@keyframes shine{to{background-position:-150% 0}}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes glow{0%,100%{border-color:var(--ink)}50%{border-color:var(--accent)}}
-@media (prefers-reduced-motion:reduce){.features li{animation:none;-webkit-text-fill-color:var(--ink);background:none}}
-body{position:relative;overflow:hidden}
-body>*{position:relative;z-index:1}
-body::before,body::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.35;z-index:0;background:var(--accent);animation:drift 14s ease-in-out infinite alternate}
-body::before{width:45vmax;height:45vmax;top:-15vmax;left:-15vmax}
-body::after{width:40vmax;height:40vmax;bottom:-15vmax;right:-12vmax;background:var(--ink);opacity:.18;animation-duration:18s}
-@keyframes drift{to{transform:translate(12vmax,8vmax) scale(1.25)}}
-h1{animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
-h1 span{display:block;animation:pulse 2.4s ease-in-out 1s infinite}
-@keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-#cd{animation:fadein .8s .5s both}
-#when{animation:fadein .8s .8s both}
-.ft{animation:fadein .8s 1s both}
-#s{animation:tickpop 1s ease-in-out infinite;color:var(--accent)}
-@keyframes fadein{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes tickpop{0%{transform:scale(1.18)}60%,100%{transform:scale(1)}}
-@media (prefers-reduced-motion:reduce){body::before,body::after,h1,h1 span,#cd,#when,.ft,#s{animation:none}}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--ink);font:800 16px/1.5 Nunito,system-ui,sans-serif;
+ background:var(--blue) radial-gradient(circle at 20% 10%,#1a46c4 0,transparent 45%),radial-gradient(circle at 90% 80%,#a30c1f55 0,transparent 40%);overflow-x:hidden}
+.disp{font-family:"Bowlby One",Impact,sans-serif;font-weight:400;letter-spacing:.01em}
+/* banderitas */
+.flags{display:flex;height:46px;overflow:hidden;transform-origin:top;position:relative}
+.flags i{flex:1 0 34px;height:100%;clip-path:polygon(0 0,100% 0,50% 100%);animation:sway 2.8s ease-in-out infinite;transform-origin:top}
+@keyframes sway{50%{transform:rotate(7deg)}}
+.marquee{background:var(--sun);color:var(--ink);overflow:hidden;white-space:nowrap;border-block:4px solid var(--ink)}
+.marquee div{display:inline-block;padding:6px 0;animation:run 26s linear infinite}
+.marquee span{margin:0 22px}
+@keyframes run{to{transform:translateX(-50%)}}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 5vw}
+.logo{color:var(--sun);font-size:1.5rem;text-shadow:3px 3px 0 var(--red);line-height:1}
+.who{display:flex;gap:8px;align-items:center;color:#fff;font-size:.85rem}
+.who img{width:30px;height:30px;border-radius:50%;border:2px solid var(--sun)}
+main{max-width:980px;margin:0 auto;padding:10px 5vw 120px;position:relative}
+/* jeepney sign panel */
+.sign{position:relative;background:var(--paper);border:5px solid var(--ink);border-radius:22px;padding:26px 22px 24px;max-width:540px;margin:34px auto;
+ box-shadow:8px 8px 0 var(--red),8px 8px 0 4px var(--ink)}
+.sign::before{content:"";position:absolute;inset:7px;border:3px dashed var(--blue);border-radius:14px;pointer-events:none}
+.sign h1{font-size:clamp(2.1rem,9vw,3.3rem);line-height:1;margin:6px 0 12px;color:var(--red);text-shadow:2px 2px 0 var(--sun)}
+.sign h2{font-size:1.7rem;color:var(--blue);margin:4px 0 10px}
+.sun{position:absolute;width:150px;height:150px;right:-44px;top:-62px;animation:spin 40s linear infinite;filter:drop-shadow(3px 3px 0 var(--ink))}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn{display:inline-block;border:4px solid var(--ink);border-radius:14px;padding:12px 20px;font:inherit;font-size:1.05rem;color:#fff;background:var(--red);cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn.y{background:var(--sun);color:var(--ink)}
+.btn.sm{padding:6px 12px;font-size:.85rem;box-shadow:3px 3px 0 var(--ink)}
+.btn:focus-visible,input:focus-visible{outline:4px solid var(--blue);outline-offset:3px}
+input{width:100%;padding:12px;border:4px solid var(--ink);border-radius:12px;font:inherit;margin:6px 0 14px;background:#fff}
+.msg{border:3px solid var(--ink);border-radius:12px;padding:10px 12px;margin:14px 0;font-size:.95rem}
+.msg.bad{background:#ffd9dc}.msg.ok{background:#d9f5e3}
+.tiny{font-size:.82rem;opacity:.75}
+.hide{display:none!important}
+/* shop */
+.hero{text-align:center;color:#fff;padding:30px 0 6px;position:relative}
+.hero h1{font-size:clamp(2.6rem,11vw,5.2rem);line-height:.95;color:var(--sun);text-shadow:4px 4px 0 var(--red),7px 7px 0 var(--ink);margin:0 0 10px}
+.hero p{max-width:480px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;margin-top:30px}
+.card{background:var(--paper);border:5px solid var(--ink);border-radius:20px;padding:16px;box-shadow:6px 6px 0 var(--ink);transition:transform .2s}
+.card:nth-child(odd){transform:rotate(-1.2deg)}.card:nth-child(even){transform:rotate(1.2deg)}
+.card:hover{transform:rotate(0) translateY(-6px)}
+.blob{height:120px;border:4px solid var(--ink);border-radius:50% 46% 54% 48%/52% 50% 50% 48%;display:grid;place-items:center;font-size:3.6rem;margin-bottom:12px}
+.card h3{font-size:1.3rem;margin:0 0 2px;color:var(--blue)}
+.card p{margin:0 0 10px;font-size:.9rem}
+.row{display:flex;justify-content:space-between;align-items:center}
+.price{font-size:1.3rem;color:var(--red)}
+/* cart bar */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--sun);border-top:5px solid var(--ink);padding:10px 5vw calc(10px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;gap:10px;z-index:5}
+.modal{position:fixed;inset:0;background:#000a;display:grid;place-items:center;padding:16px;z-index:9}
+.modal .sign{margin:0;max-height:90vh;overflow:auto}
+pre{white-space:pre-wrap;background:#fff;border:3px solid var(--ink);border-radius:10px;padding:10px;font:inherit;font-size:.9rem}
+footer{text-align:center;color:#fff;opacity:.8;font-size:.8rem;padding:0 5vw 100px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<h1>Coming <span>Soon.</span></h1>
-<div id="cd" aria-live="off">
-  <div><b id="d">00</b><small>Days</small></div>
-  <div><b id="h">00</b><small>Hours</small></div>
-  <div><b id="m">00</b><small>Minutes</small></div>
-  <div><b id="s">00</b><small>Seconds</small></div>
+<div class="flags" id="flags" aria-hidden="true"></div>
+<div class="marquee" aria-hidden="true"><div id="mq"></div></div>
+
+<header>
+  <div class="logo disp">USOK<br>TAYO!</div>
+  <div class="who hide" id="who"><img id="avatar" alt=""><span id="uname"></span><button class="btn sm y" style="color:var(--ink)" onclick="logout()">Gawas</button></div>
+</header>
+
+<main>
+  <!-- LOGIN -->
+  <section class="sign" id="s-login">
+    <svg class="sun" viewBox="-50 -50 100 100" data-sun></svg>
+    <h1 class="disp">18+<br>LANG PO!</h1>
+    <p>Para makasulod, mag-login gamit imong Gmail. Tan-awon nato ang birthday sa imong Google account aron masiguro nga dili ka menor de edad.</p>
+    <button class="btn" onclick="login()">Login gamit Google</button>
+    <div id="login-msg"></div>
+    <p class="tiny">Ang vape adunay nikotina nga makadaot sa panglawas. Dili para sa ubos sa 18.</p>
+  </section>
+
+  <!-- MANUAL DOB -->
+  <section class="sign hide" id="s-dob">
+    <h2 class="disp">Wala makita ang birthday mo</h2>
+    <p>Walay birthday ang imong Google account. Ibutang ang imong petsa sa pagkahimugso. Ipakita ang ID sa pagkuha sa order.</p>
+    <label for="dob">Petsa sa pagkahimugso</label>
+    <input type="date" id="dob">
+    <button class="btn y" style="color:var(--ink)" onclick="manualDob()">Ipadayon</button>
+    <div id="dob-msg"></div>
+  </section>
+
+  <!-- PAYMENT -->
+  <section class="sign hide" id="s-pay">
+    <svg class="sun" viewBox="-50 -50 100 100" data-sun></svg>
+    <h2 class="disp">Bayad: ₱500</h2>
+    <p>Bayri ang ₱500 aron makasulod sa tindahan.</p>
+    <p><strong>GCash:</strong> 09XX XXX XXXX<br><span class="tiny">(Ilisi sa imong number)</span></p>
+    <label for="ref">Reference number sa bayad</label>
+    <input id="ref" placeholder="Pananglitan: 1234 567 890123" inputmode="numeric">
+    <button class="btn" onclick="confirmPay()">Bayad na ko!</button>
+    <div id="pay-msg"></div>
+  </section>
+
+  <!-- SHOP -->
+  <section class="hide" id="s-shop">
+    <div class="hero">
+      <h1 class="disp">PILI NA,<br>KABAYAN!</h1>
+      <p>Mga lami nga inspirasyon sa atong pagkaon. Para sa 18+ ra.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<footer>Para sa 18 anyos pataas. Gama sa Pilipinas.</footer>
+
+<div class="bar hide" id="bar">
+  <div><strong id="cnt">0</strong> ka item &middot; <span class="disp" style="font-size:1.3rem" id="tot">₱0</span></div>
+  <button class="btn" onclick="checkout()">Order na!</button>
 </div>
-<p id="when">Saturday, October 24, 11:00 PM</p>
-<h2 class="ft">FEATURES</h2>
-<ul class="features">
-  <li>New SAM Viral</li>
-  <li>All SAM Video Viral</li>
-</ul>
+
+<div class="modal hide" id="modal">
+  <div class="sign">
+    <h2 class="disp">Imong Order</h2>
+    <pre id="sum"></pre>
+    <p class="tiny">Ipadala kini sa tindahan (Messenger/SMS) ug bayri sa GCash 09XX XXX XXXX.</p>
+    <button class="btn y" style="color:var(--ink)" onclick="copySum()">Kopyahon</button>
+    <button class="btn sm" onclick="$('modal').classList.add('hide')">Sirado</button>
+    <div id="copy-msg"></div>
+  </div>
+</div>
+
 <script>
-var target=new Date('2026-10-24T23:00:00+08:00').getTime();
-function p(n){return String(n).padStart(2,'0')}
-function tick(){
-  var t=target-Date.now();
-  if(t<=0){document.getElementById('cd').innerHTML='<b>Launching now!</b>';return}
-  document.getElementById('d').textContent=p(Math.floor(t/864e5));
-  document.getElementById('h').textContent=p(Math.floor(t%864e5/36e5));
-  document.getElementById('m').textContent=p(Math.floor(t%36e5/6e4));
-  document.getElementById('s').textContent=p(Math.floor(t%6e4/1e3));
-  setTimeout(tick,1000);
+// ====== SETTINGS ======
+const CLIENT_ID = "ILISI-SA-IMONG-GOOGLE-CLIENT-ID.apps.googleusercontent.com";
+const MIN_AGE = 18;
+const PRODUCTS = [  // Ilisi ang ngalan ug presyo
+  {id:1,name:"Calamansi Ice",desc:"Asim-lami ug bugnaw. 30ml",price:350,emoji:"🍋",bg:"#FCD116"},
+  {id:2,name:"Ube Halaya",desc:"Tam-is nga lila. 30ml",price:380,emoji:"🍠",bg:"#B58CF0"},
+  {id:3,name:"Buko Pandan",desc:"Lab-as nga lunhaw. 30ml",price:380,emoji:"🥥",bg:"#7BD389"},
+  {id:4,name:"Mango Graham",desc:"Hinog nga mangga. 30ml",price:360,emoji:"🥭",bg:"#FFB347"},
+  {id:5,name:"Starter Pod Kit",desc:"Sayon gamiton para sa bag-o",price:950,emoji:"💨",bg:"#7FB3FF"},
+  {id:6,name:"Replacement Coil",desc:"Pack sa 5",price:300,emoji:"🔩",bg:"#F28B9B"}
+];
+// ======================
+
+const $ = id => document.getElementById(id);
+let user = null, cart = {};
+const peso = n => "₱" + n.toLocaleString("en-PH");
+
+/* decor */
+(function(){
+  const cols=["#CE1126","#FCD116","#fff","#0B2A8A"];
+  $("flags").innerHTML = Array.from({length:40},(_,i)=>'<i style="background:'+cols[i%4]+';animation-delay:-'+(i%7)*.4+'s"></i>').join("");
+  const t = '<span>PARA SA 18+</span><span>★ MAGANDANG ARAW ★</span><span>MAAYONG ADLAW</span><span>★ TARA, USOK TAYO ★</span>';
+  $("mq").innerHTML = t.repeat(8);
+  let r="";
+  for(let i=0;i<16;i++){const a=i*22.5,L=i%2?30:46;r+='<polygon transform="rotate('+a+')" points="-4,-18 4,-18 0,-'+L+'" fill="#FCD116" stroke="#16110A" stroke-width="1.6" stroke-linejoin="round"/>';}
+  r+='<circle r="19" fill="#FCD116" stroke="#16110A" stroke-width="2.4"/><circle r="11" fill="#CE1126" stroke="#16110A" stroke-width="2"/>';
+  document.querySelectorAll("[data-sun]").forEach(s=>s.innerHTML=r);
+})();
+
+function show(id){["s-login","s-dob","s-pay","s-shop"].forEach(s=>$(s).classList.toggle("hide",s!==id));
+  $("bar").classList.toggle("hide", id!=="s-shop"); window.scrollTo(0,0);}
+function note(id,text,type){$(id).innerHTML='<div class="msg '+type+'">'+text+'</div>';}
+function ageFrom(y,m,d){const t=new Date();let a=t.getFullYear()-y;if(t.getMonth()+1<m||(t.getMonth()+1===m&&t.getDate()<d))a--;return a;}
+function save(){try{sessionStorage.setItem("usok",JSON.stringify(user));}catch(e){}}
+
+/* login */
+function login(){
+  if(!window.google||!google.accounts){note("login-msg","Wala pa ma-load ang Google. Sulayi balik.","bad");return;}
+  if(CLIENT_ID.startsWith("ILISI")){note("login-msg","Ibutang una ang imong Google CLIENT_ID sa code.","bad");return;}
+  google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,
+    scope:"openid profile email https://www.googleapis.com/auth/user.birthday.read",callback:onToken}).requestAccessToken();
 }
-tick();
+async function onToken(res){
+  if(res.error){note("login-msg","Napakyas ang login. Sulayi balik.","bad");return;}
+  try{
+    const r=await fetch("https://people.googleapis.com/v1/people/me?personFields=names,photos,emailAddresses,birthdays",{headers:{Authorization:"Bearer "+res.access_token}});
+    const p=await r.json();
+    user={name:(p.names&&p.names[0]&&p.names[0].displayName)||"Kabayan",photo:(p.photos&&p.photos[0]&&p.photos[0].url)||"",
+      email:(p.emailAddresses&&p.emailAddresses[0]&&p.emailAddresses[0].value)||"",paid:false,age:null,source:"google"};
+    const b=(p.birthdays||[]).find(x=>x.date&&x.date.year);
+    if(b){checkAge(ageFrom(b.date.year,b.date.month,b.date.day));}else{header();show("s-dob");}
+  }catch(e){note("login-msg","Dili makuha ang account info. Sulayi balik.","bad");}
+}
+function header(){$("who").classList.remove("hide");$("uname").textContent=user.name;
+  if(user.photo){$("avatar").src=user.photo;$("avatar").classList.remove("hide");}else $("avatar").classList.add("hide");}
+function checkAge(age){
+  if(age<MIN_AGE){user=null;try{sessionStorage.removeItem("usok");}catch(e){}
+    $("who").classList.add("hide");show("s-login");
+    note("login-msg","Pasayloa, "+MIN_AGE+" anyos pataas ra ang pwede makasulod.","bad");return;}
+  user.age=age;header();save();show("s-pay");
+}
+function manualDob(){
+  const v=$("dob").value;if(!v){note("dob-msg","Ibutang ang petsa.","bad");return;}
+  const [y,m,d]=v.split("-").map(Number);user.source="manual";checkAge(ageFrom(y,m,d));
+}
+function confirmPay(){
+  const ref=$("ref").value.replace(/\s/g,"");
+  if(ref.length<8){note("pay-msg","Ibutang ang saktong reference number.","bad");return;}
+  // Para sa tinuod nga sistema: i-verify ang bayad sa server (PayMongo/GCash API), dili diri.
+  user.paid=true;save();openShop();
+}
+function logout(){user=null;cart={};try{sessionStorage.removeItem("usok");}catch(e){}
+  $("who").classList.add("hide");$("login-msg").innerHTML="";show("s-login");}
+
+/* shop + cart */
+function openShop(){
+  $("grid").innerHTML=PRODUCTS.map(p=>'<div class="card"><div class="blob" style="background:'+p.bg+'">'+p.emoji+'</div><h3 class="disp">'+p.name+'</h3><p>'+p.desc+'</p><div class="row"><span class="price disp">'+peso(p.price)+'</span><button class="btn sm" onclick="add('+p.id+')">+ Idugang</button></div></div>').join("");
+  show("s-shop");upd();
+}
+function add(id){cart[id]=(cart[id]||0)+1;upd();}
+function upd(){
+  let c=0,t=0;PRODUCTS.forEach(p=>{const q=cart[p.id]||0;c+=q;t+=q*p.price;});
+  $("cnt").textContent=c;$("tot").textContent=peso(t);
+}
+function summary(){
+  let t=0,l=[];PRODUCTS.forEach(p=>{const q=cart[p.id]||0;if(q){l.push(q+" x "+p.name+" - "+peso(q*p.price));t+=q*p.price;}});
+  return l.length?("Order ni "+user.name+"\n"+l.join("\n")+"\nTotal: "+peso(t)):"";
+}
+function checkout(){
+  const s=summary();if(!s){alert("Wala pa kay gipili.");return;}
+  $("sum").textContent=s;$("copy-msg").innerHTML="";$("modal").classList.remove("hide");
+}
+function copySum(){
+  try{navigator.clipboard.writeText($("sum").textContent).then(()=>note("copy-msg","Na-kopya na!","ok"));}
+  catch(e){note("copy-msg","Dili ma-kopya. I-select ug kopyaha manual.","bad");}
+}
+
+/* restore session */
+try{const s=JSON.parse(sessionStorage.getItem("usok")||"null");
+  if(s&&s.age>=MIN_AGE){user=s;header();s.paid?openShop():show("s-pay");}}catch(e){}
 </script>
 </body>
 </html>
