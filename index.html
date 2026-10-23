@@ -180,44 +180,36 @@
   /* ---------- HUMAN VERIFICATION ---------- */
   #verify {
     position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center;
-    background: rgba(5,3,8,.82); backdrop-filter: blur(4px); padding: 18px;
+    background: rgba(5,3,8,.82); backdrop-filter: blur(4px); padding: 14px;
   }
   #verify.show { display: flex; animation: pop .2s; }
   .vbox {
-    width: 100%; max-width: 320px; background: #181818; border: 1px solid var(--borderhi); border-radius: 18px;
-    padding: 18px 16px; box-shadow: 0 0 40px rgba(var(--glow),.3); position: relative; text-align: center;
+    width: 100%; max-width: 340px; background: #fff; border-radius: 14px; padding: 22px 14px 14px;
+    box-shadow: 0 0 40px rgba(var(--glow),.35); position: relative; text-align: center;
   }
-  .vbox h2 { font-size: 1.05rem; margin: 4px 0 4px; }
-  .vbox p { color: var(--muted); font-size: .78rem; margin-bottom: 14px; }
-  .vclose { position: absolute; top: 8px; right: 10px; background: none; border: 0; color: #888; font-size: 1.1rem; cursor: pointer; }
+  .vclose { position: absolute; top: 6px; right: 10px; background: none; border: 0; color: #999; font-size: 1.1rem; cursor: pointer; }
+  .vicon { width: 64px; height: 64px; border-radius: 16px; object-fit: cover; display: block; margin: 0 auto 18px;
+           border: 2px solid var(--orange1); box-shadow: 0 0 14px rgba(var(--glow),.45); }
   .check-row {
-    display: flex; align-items: center; gap: 12px; background: #0d0d0d; border: 1px solid #333;
-    border-radius: 12px; padding: 12px 14px; cursor: pointer; text-align: left; user-select: none;
+    display: flex; align-items: center; gap: 12px; background: #f9f9f9; border: 2px solid #e2e2e2;
+    padding: 12px 12px; cursor: pointer; text-align: left; user-select: none;
   }
   .check-row .box {
-    width: 24px; height: 24px; border: 2px solid #777; border-radius: 6px; display: grid; place-items: center;
-    flex: none; transition: .2s; font-size: 16px; color: transparent;
+    width: 32px; height: 32px; border: 3px solid #dcdcdc; border-radius: 6px; background: #f3f3f3;
+    display: grid; place-items: center; flex: none; transition: .2s; font-size: 20px; color: transparent;
   }
-  .check-row.loading .box { border-color: var(--orange1); border-top-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; }
+  .check-row .t { flex: 1; font-size: .98rem; color: #111; line-height: 1.15; }
+  .check-row.loading .box { border-color: var(--orange1); border-top-color: transparent; border-radius: 50%; background: transparent; animation: spin .7s linear infinite; }
   .check-row.done .box { background: #2fbf5b; border-color: #2fbf5b; color: #fff; }
-  .check-row.done { cursor: default; border-color: #1f5a30; }
+  .check-row.done { cursor: default; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .check-row span.t { font-size: .9rem; }
-  .vbrand { margin-top: 12px; font-size: .68rem; color: #666; }
+  .vbrandbox { text-align: right; flex: none; }
+  .vbrandbox b { display: block; color: #111; font-size: .72rem; letter-spacing: .8px; font-weight: 800; }
+  .vbrandbox small { color: #666; font-size: .62rem; }
   #challenge { display: none; margin-top: 12px; }
   #challenge.show { display: block; animation: pop .2s; }
-  #challenge .q { font-size: .95rem; margin-bottom: 8px; }
-  #challenge .q b { color: var(--accent); font-size: 1.1rem; }
-  #challenge input {
-    width: 100%; background: #0d0d0d; border: 1px solid #333; border-radius: 10px; color: #fff;
-    padding: 10px; font-size: 1rem; text-align: center; outline: 0;
-  }
-  #challenge input:focus { border-color: var(--orange1); }
-  #challenge .go { margin-top: 10px; }
+  #challenge .go { margin-top: 0; }
   .vbox.shake { animation: shake .35s; }
-
-
-
   .countdown {
     display: block; width: fit-content; margin: -8px auto 16px; padding: 6px 14px; border-radius: 999px;
     background: rgba(0,0,0,.45); border: 1px solid var(--border); color: var(--accent);
@@ -287,19 +279,15 @@
 <div id="verify">
   <div class="vbox" id="vbox">
     <button class="vclose" id="vclose" type="button">✕</button>
-    <div style="font-size:1.8rem">🎃</div>
-    <h2>Human Verification</h2>
-    <p>Confirm you're human to open the link</p>
+    <img class="vicon" id="vIcon" alt="Bacon Site">
     <div class="check-row" id="checkRow">
       <div class="box" id="chkBox">✓</div>
-      <span class="t" id="chkText">I'm not a robot</span>
+      <span class="t" id="chkText">Verify you are human</span>
+      <div class="vbrandbox"><b>🎃 BACON SITE</b><small>Verification</small></div>
     </div>
     <div id="challenge">
-      <div class="q">What is <b id="qText">3 + 4</b> ?</div>
-      <input id="ans" type="number" inputmode="numeric" placeholder="Answer" autocomplete="off">
-      <button class="go" id="vBtn" type="button">Verify &amp; Open →</button>
+      <button class="go" id="vBtn" type="button">Continue →</button>
     </div>
-    <div class="vbrand">🕸️ Bacon Site Verification</div>
   </div>
 </div>
 
@@ -320,7 +308,7 @@
     logoBtn.appendChild(img);
     favicon.href = src;
   }
-  function loadIcon() { setIcon(DEFAULT_ICON); }   // icon is fixed — cannot be changed
+  function loadIcon() { setIcon(DEFAULT_ICON); $('vIcon').src = DEFAULT_ICON; }   // icon is fixed — cannot be changed
   loadIcon();
   try { localStorage.removeItem('siteIcon'); } catch {}
 
@@ -403,14 +391,10 @@
 
   /* ---------- HUMAN VERIFICATION ---------- */
   const verifyEl = $('verify'), checkRow = $('checkRow'), challenge = $('challenge');
-  let answer = 0, busy = false;
-  function newQuestion() {
-    const a = 2 + Math.floor(Math.random() * 9), b = 2 + Math.floor(Math.random() * 9);
-    answer = a + b; $('qText').textContent = a + ' + ' + b; $('ans').value = '';
-  }
+  let busy = false;
   function resetVerify() {
-    busy = false; checkRow.className = 'check-row'; $('chkText').textContent = "I'm not a robot";
-    challenge.classList.remove('show'); newQuestion();
+    busy = false; checkRow.className = 'check-row'; $('chkText').textContent = 'Verify you are human';
+    challenge.classList.remove('show');
   }
   function showVerify() { resetVerify(); verifyEl.classList.add('show'); }
   function hideVerify() { verifyEl.classList.remove('show'); }
@@ -418,20 +402,12 @@
     if (busy || checkRow.classList.contains('done')) return;
     busy = true; checkRow.classList.add('loading'); $('chkText').textContent = 'Verifying...';
     setTimeout(() => {
-      checkRow.className = 'check-row done'; $('chkText').textContent = 'Almost there';
-      challenge.classList.add('show'); $('ans').focus();
+      checkRow.className = 'check-row done'; $('chkText').textContent = 'Success!';
+      challenge.classList.add('show');
     }, 1200);
   });
-  function submitVerify() {
-    if (parseInt($('ans').value, 10) === answer) {
-      hideVerify(); doOpen();                       // runs inside the click → not blocked
-    } else {
-      const vb = $('vbox'); vb.classList.remove('shake'); void vb.offsetWidth; vb.classList.add('shake');
-      newQuestion(); $('ans').focus();
-    }
-  }
+  function submitVerify() { hideVerify(); doOpen(); }   // click = user gesture, so the new tab isn't blocked
   $('vBtn').addEventListener('click', submitVerify);
-  $('ans').addEventListener('keydown', e => { if (e.key === 'Enter') submitVerify(); });
   $('vclose').addEventListener('click', hideVerify);
   verifyEl.addEventListener('click', e => { if (e.target === verifyEl) hideVerify(); });
 
